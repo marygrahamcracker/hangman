@@ -1,17 +1,19 @@
 .keyboard-row1 {
-    margin-bottom: 8px
+    margin-bottom: 5px
 }
 
 .keyboard-row2 {
-    margin-bottom: 8px
+    margin-bottom: 5px;
+    margin-left: 10px;
 }
 
 .keyboard-row3 {
-    margin-bottom: 8px
+    margin-bottom: 5px;
+    margin-left: 32px;
 }
 
 .all-keyboard {
-    margin: 11px;
+    margin: 5px;
 }
 
 .gallow {
