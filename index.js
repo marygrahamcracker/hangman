@@ -145,3 +145,45 @@ const drawLegRight = () => {
     context.lineTo(250, 280);
     context.stroke();
 }
+
+const drawSmile = () => {
+    const canvas = document.getElementById('gallow');
+    const context = canvas.getContext('2d');
+    context.beginPath();
+    context.strokeStyle = 'black';
+    context.lineWidth = 3;
+    context.arc(200, 50, 20, 0, Math.PI, false);
+    context.stroke();
+};
+
+const drawHappyEyes = () => {
+    const canvas = document.getElementById('gallow');
+    const context = canvas.getContext('2d');
+    context.beginPath();
+    context.strokeStyle = 'black';
+    context.lineWidth = 3;
+    context.arc(190, 45, 3, 0, Math.PI * 2, true); //draw left eye
+    context.arc(210, 45, 3, 0, Math.PI * 2, true); // draw right eye
+    context.stroke();
+}
+
+const drawFrown = () => {
+    const canvas = document.getElementById('gallow');
+    const context = canvas.getContext('2d');
+    context.beginPath();
+    context.strokeStyle = 'black';
+    context.lineWidth = 3;
+    context.arc(200, 70, 10, 0, Math.PI, true);
+    context.stroke();
+}
+
+const drawSadEyes = () => {
+    const canvas = document.getElementById('gallow');
+    const context = canvas.getContext('2d');
+    context.beginPath();
+    context.strokeStyle = 'black';
+    context.lineWidth = 3;
+    context.arc(190, 45, 3, 0, Math.PI * 2, true); //draw left eye
+    context.arc(210, 45, 3, 0, Math.PI * 2, true); // draw right eye
+    context.stroke();
+}
