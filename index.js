@@ -62,7 +62,9 @@ const startNewGame = () => {
     clearDrawing();
     drawGallows();
     document.getElementById('lblMessage').innerText = 'click the letters to guess';
-    let playingGame = true;
+    playingGame = true;
+    lettersGuessed = '';
+    missedGuesses = 0;
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     for (let i = 0; i < alphabet.length; i++) {
         document.getElementById(`btn${alphabet[i]}`).disabled = false;
@@ -74,59 +76,56 @@ const btnLetterClick = (letterBeingPassedIn) => {
      if (!playingGame) {
         return;
      };
-    lettersGuessed += letterBeingPassedIn;
-        console.log(letterBeingPassedIn);
-        let mybutton = document.getElementById(`btn${letterBeingPassedIn}`)
-        mybutton.disabled = true;
+    lettersGuessed += letterBeingPassedIn.toLowerCase();
+    let mybutton = document.getElementById(`btn${letterBeingPassedIn}`)
+    mybutton.disabled = true;
 
-        const foundLetter = wordToGuess.toLowerCase().includes(letterBeingPassedIn.toLowerCase());
-        if (foundLetter) {
-        
-        } else {
-            missedGuesses++;
-            if (missedGuesses == 1) {
-                drawHead();
-            } else if (missedGuesses == 2) {
-                drawBody();
-            } else if (missedGuesses == 3) {
-                drawArmLeft();
-            } else if (missedGuesses == 4) {
-                drawArmRight();
-            } else if (missedGuesses == 5) {
-                drawLegLeft();
-            } else if (missedGuesses == 6) {
-                drawLegRight();
-            } else {drawFrown(); drawSadEyes(); }
-      
-           };
-
-        if (missedGuessed == 7) {
-            document.getElementById('lblMessage').innerText = 'you lost. click new game to play again!';
-            playingGame = false;
-        } else if (areAllLettersGuessed()) {
+    const foundLetter = wordToGuess.toLowerCase().includes(letterBeingPassedIn.toLowerCase());
+    if (foundLetter) {
+        revealLetter(letterBeingPassedIn);
+        if (areAllLettersGuessed()) {
             drawHead();
             drawSmile();
             drawHappyEyes();
             document.getElementById('lblMessage').innerText = 'you win! click new game to play again!';
             playingGame = false;
-        };
-
+        }
+    } else {
+        missedGuesses++;
+        if (missedGuesses == 1) {
+            drawHead();
+        } else if (missedGuesses == 2) {
+            drawBody();
+        } else if (missedGuesses == 3) {
+            drawArmLeft();
+        } else if (missedGuesses == 4) {
+            drawArmRight();
+        } else if (missedGuesses == 5) {
+            drawLegLeft();
+        } else if (missedGuesses == 6) {
+            drawLegRight();
+        } else {
+            drawFrown();
+            drawSadEyes();
+            document.getElementById('lblMessage').innerText = 'you lost. click new game to play again!';
+            playingGame = false;
+        }
+    }
  };
 
 const revealLetter = (letter) => {
-    for (let i = 0; i < currentword.length; i++) {
-        const currentwordletter = currentword[i];
+    for (let i = 0; i < wordToGuess.length; i++) {
+        const currentwordletter = wordToGuess[i];
         if (letter.toLowerCase() === currentwordletter.toLowerCase()) {
-            const inputvar = document.getElementById(`hm-letter-to-guess${i}`);
+            const inputvar = document.getElementById(`hm-letter-to-guess-${i}`);
             inputvar.value = currentwordletter;
-
-};
-};
+        }
+    }
 };
 
 const areAllLettersGuessed = () => {
-    for (let i = 0; i < currentword.length; i++) {
-        const currentwordletter = currentword[i];
+    for (let i = 0; i < wordToGuess.length; i++) {
+        const currentwordletter = wordToGuess[i].toLowerCase();
         if (!lettersGuessed.includes(currentwordletter)) {
             return false;
         }
